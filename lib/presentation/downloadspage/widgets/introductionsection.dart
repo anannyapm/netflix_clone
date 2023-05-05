@@ -1,19 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:netflix/domain/apiendpoint.dart';
+import 'package:netflix/model/movie_info.dart';
 
 import '../../../core/colors/colors.dart';
 import '../../../core/constants/constant.dart';
+import '../../../infrastructure/base_client.dart';
 import 'downloadsimage.dart';
 
-class IntroDownloads extends StatelessWidget {
-  IntroDownloads({
+class IntroDownloads extends StatefulWidget {
+  const IntroDownloads({
     super.key,
   });
 
-  final List imageList = [
-    'https://www.themoviedb.org/t/p/original/zPOc45oBZNQRLsRw5M5JoKv2yUQ.jpg',
-    'https://www.themoviedb.org/t/p/original/kk8YxDDVBdI9s8NzkC0tUNQcAHG.jpg',
-    'https://www.themoviedb.org/t/p/original/lLdUjbedjbQgHYIqiEVWcwmesRO.jpg'
-  ];
+  @override
+  State<IntroDownloads> createState() => _IntroDownloadsState();
+}
+
+class _IntroDownloadsState extends State<IntroDownloads> {
+  List imageList = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initializeImages();
+  }
+
+  initializeImages() async {
+    dynamic result = await apicall(ApiEndPoints.trendingall);
+    result == null ? debugPrint("null") : debugPrint("not null");
+    setState(() {
+      imageList = result.results.map((MovieInfoModel movieInfo) {
+        if (movieInfo.posterPath == null) {
+          return null;
+        }
+
+        String imageUrl =
+            'https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=b2dee3b855c4ea705ff5dda3c0201768';
+        return imageUrl;
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +62,10 @@ class IntroDownloads extends StatelessWidget {
             fontSize: 14,
           ),
         ),
-        
         Container(
           margin: EdgeInsets.zero,
           width: size.width,
-          height: size.width*0.95,
+          height: size.width * 0.95,
           child: Stack(
             alignment: Alignment.center,
             children: imageList.length < 3

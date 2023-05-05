@@ -7,27 +7,33 @@ import 'package:netflix/presentation/downloadspage/widgets/setupsection.dart';
 import 'package:netflix/presentation/widgets/customappbar.dart';
 
 
+
 class ScreenDownload extends StatelessWidget {
-   ScreenDownload({super.key});
+  ScreenDownload({super.key});
 
-  final widgetList=[
+  final widgetList = [
     const SmartDownloadSection(),
-            IntroDownloads(),
-
-            const SetupSection(),
+    const IntroDownloads(),
+    const SetupSection(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const PreferredSize(
             preferredSize: Size.fromHeight(60),
-            child: CustomeAppBar(title: "Downloads")),
+            child: CustomeAppBar(
+              leftwidget: Text(
+                "Downloads",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+              ),
+            )),
         body: ListView.separated(
           padding: const EdgeInsets.all(10),
-          itemBuilder: (ctx,index)=>widgetList[index],
-          separatorBuilder: (ctx,index)=>const SizedBox(height: 25,),
+          itemBuilder: (ctx, index) => widgetList[index],
+          separatorBuilder: (ctx, index) => const SizedBox(
+            height: 25,
+          ),
           itemCount: widgetList.length,
-          
         ));
   }
 }
@@ -46,9 +52,11 @@ class SmartDownloadSection extends StatelessWidget {
           color: kWhiteColor,
         ),
         kWidth,
-        Text("Smart Downloads",style: TextStyle(fontWeight: FontWeight.w900),),
+        Text(
+          "Smart Downloads",
+          style: TextStyle(fontWeight: FontWeight.w900),
+        ),
       ],
     );
   }
 }
-

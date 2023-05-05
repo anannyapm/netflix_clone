@@ -6,11 +6,18 @@ import 'package:netflix/presentation/search/widgets/search_result.dart';
 import '../../core/colors/colors.dart';
 import '../../core/constants/constant.dart';
 
-class ScreenSearch extends StatelessWidget {
+class ScreenSearch extends StatefulWidget {
   const ScreenSearch({super.key});
 
   @override
+  State<ScreenSearch> createState() => _ScreenSearchState();
+}
+
+class _ScreenSearchState extends State<ScreenSearch> {
+  String query = '';
+  @override
   Widget build(BuildContext context) {
+    //TextEditingController _searchController = TextEditingController();
     return Scaffold(
         body: SafeArea(
             child: Padding(
@@ -19,6 +26,12 @@ class ScreenSearch extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CupertinoSearchTextField(
+            //controller: _searchController,
+            onChanged: (value) {
+              setState(() {
+                query = value;
+              });
+            },
             backgroundColor: Colors.grey.withOpacity(0.4),
             prefixIcon: const Icon(
               CupertinoIcons.search,
@@ -32,9 +45,7 @@ class ScreenSearch extends StatelessWidget {
           ),
           kHeight,
           //const Expanded(child: SearchIdleWidget())
-          const Expanded(child: SearchResultWidget())
-         
-
+          Expanded(child: query.isEmpty?const SearchIdleWidget(): SearchResultWidget(apiQuery: query,))
         ],
       ),
     )));

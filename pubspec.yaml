@@ -38,6 +38,9 @@ dependencies:
   google_fonts: ^4.0.4
   path_provider: ^2.0.14
   video_player: ^2.6.1
+  bordered_text: ^2.0.0
+  http: ^0.13.6
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
