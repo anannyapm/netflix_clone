@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:netflix/core/constants/constant.dart';
 import 'package:netflix/domain/apiendpoint.dart';
 import 'package:netflix/infrastructure/apikey.dart';
@@ -10,8 +8,8 @@ import 'package:netflix/presentation/search/widgets/titlewidget.dart';
 import '../../../model/movie_info.dart';
 import '../../widgets/mainmoviecard.dart';
 
-const imageUrl =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWWsVTjDaK9xTorMHSm6oxAll80fttPtDPkg&usqp=CAU";
+String imageUrl =
+    "https://media.istockphoto.com/id/1051788618/vector/movie-and-film-poster-template-design-modern-retro-vintage-style.jpg?s=612x612&w=0&k=20&c=CwMag6f5GwoHexEtMA5zrep78r4Q4yV0ZF8X0CUCIUs=";
 
 class SearchResultWidget extends StatelessWidget {
   final String apiQuery;
@@ -19,7 +17,7 @@ class SearchResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-                  List imageList = [];
+    List imageList = [];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,32 +28,31 @@ class SearchResultWidget extends StatelessWidget {
             child: FutureBuilder(
                 future: apicall(ApiEndPoints.searchmovie + apiQuery),
                 builder: (context, snapshot) {
-                  
                   if (!snapshot.hasData) {
-                ;
-                    return const Text('Please wait');
+                    return Center(
+                      child: Column(
+                        children: const [
+                          CircularProgressIndicator(color: Colors.blue,),
+                          Text('Please wait'),
+                        ],
+                      ),
+                    );
                   }
 
                   if (snapshot.data == null) {
-                 
-
-                    return const Text('No data found');
+                    return const Center(child: Text('No data found',style: TextStyle(fontSize: 20),));
                   }
                   imageList =
                       snapshot.data.results.map((MovieInfoModel movieInfo) {
-                    if (movieInfo.posterPath == null) {
-                      return null;
+                    if (movieInfo.posterPath != null) {
+                      imageUrl =
+                          'https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=$apiKey';
                     }
-                    String imageUrl =
-                        'https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=$apiKey';
                     return imageUrl;
                   }).toList();
-                  
 
                   if (imageList.isEmpty) {
-                   
-
-                    return ListTile(title: Text('No Movies Found'));
+                    return  const Center(child: Text('No Movies Found',style: TextStyle(fontSize: 20),));
                   }
 
                   return GridView.count(

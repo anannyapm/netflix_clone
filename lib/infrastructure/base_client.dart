@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:netflix/domain/apiendpoint.dart';
 
 import '../model/tmdb_api_response.dart';
 

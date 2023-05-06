@@ -21,7 +21,6 @@ class _IntroDownloadsState extends State<IntroDownloads> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     initializeImages();
   }

@@ -5,7 +5,7 @@ const kBaseUrl = "https://api.themoviedb.org/3";
 class ApiEndPoints {
   static const trendingall = "$kBaseUrl/trending/all/day?api_key=$apiKey";
   static const movielatest =
-      "https://api.themoviedb.org/3/movie/latest?api_key=9078fde7e5b4c8b7cd8ecf516d2d4c53&language=en-US&page=1";
+      "$kBaseUrl/latest?api_key=$apiKey&language=en-US&page=1";
   static const tvpopular =
       "$kBaseUrl/tv/popular?api_key=$apiKey&language=en-US&page=1";
   static const upcoming =
@@ -15,4 +15,6 @@ class ApiEndPoints {
   static const moviepopular =
       '$kBaseUrl/movie/popular?api_key=$apiKey&language=en-US&page=1';
   static const searchmovie = '$kBaseUrl/search/movie?api_key=$apiKey&query=';
+  static const tvtoprate =
+      '$kBaseUrl/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200&api_key=$apiKey';
 }

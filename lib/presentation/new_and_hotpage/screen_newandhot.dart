@@ -14,7 +14,7 @@ class ScreenNewAndHot extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: PreferredSize(
-            preferredSize: Size.fromHeight(95),
+            preferredSize: const Size.fromHeight(95),
             child: AppBar(
               title: const Text(
                 "New & Hot",
@@ -65,13 +65,13 @@ class ScreenNewAndHot extends StatelessWidget {
   }
 
   Widget buildComingSoon() {
-    return ComingSoonWidget();
+    return const ComingSoonWidget();
   }
 
   buildEveryonesWatching() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         kHeight20,
         Text(
           "🔥Everyone's watching",

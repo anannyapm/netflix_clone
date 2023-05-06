@@ -31,7 +31,6 @@ class ScreenHome extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child:
-                      //MainTitleMovieCard(title: "Released in the past year"),
                       Stack(
                     children: [
                       ListView(
@@ -52,7 +51,7 @@ class ScreenHome extends StatelessWidget {
                           NumberTitleMovieCard(),
                           kHeight,
                           MainTitleMovieCard(
-                            title: "Popular",
+                            title: "Popular Shows",
                             apiUrl: ApiEndPoints.tvpopular,
 
                           ),
@@ -92,7 +91,7 @@ class ScreenHome extends StatelessWidget {
                                         "Categories",
                                         style: kHomeTitleText,
                                       ),
-                                      Icon(Icons.arrow_drop_down)
+                                      const Icon(Icons.arrow_drop_down)
                                       ],)
                                     ],
                                   )

@@ -39,7 +39,6 @@ class _VideoListItemWidgetState extends State<VideoListItemWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     trendingDataFetch();
   }

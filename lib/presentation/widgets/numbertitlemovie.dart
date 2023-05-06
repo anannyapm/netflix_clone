@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:netflix/domain/apiendpoint.dart';
@@ -19,14 +18,21 @@ class NumberTitleMovieCard extends StatelessWidget {
     List imageList = [];
 
     return FutureBuilder(
-        future:apicall(ApiEndPoints.toprate),
+        future:apicall(ApiEndPoints.tvtoprate),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Text('Please wait');
+            return Center(
+                      child: Column(
+                        children: const [
+                          CircularProgressIndicator(color: Colors.blue,),
+                          Text('Please wait'),
+                        ],
+                      ),
+                    );
           }
 
           if (snapshot.data == null) {
-            return Text('No data found');
+            return const Center(child:  Text('No data found'));
           }
           
 
@@ -40,16 +46,16 @@ class NumberTitleMovieCard extends StatelessWidget {
             }).toList();
           
           if (imageList.isEmpty) {
-            return ListTile(title: Text('No Movies Found'));
+            return const Center(child: ListTile(title: Text('No Movies Found')));
           }
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: TitleTextWidget(
-                  title: 'Top 10 Tv Shows in India Today',
+                  title: 'Top Rated TV Shows',
                 ),
               ),
               kHeight,

@@ -15,12 +15,11 @@ class SearchIdleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenheight = MediaQuery.of(context).size.height;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SearchPageTitleWIdget(
+        const SearchPageTitleWIdget(
           title: "Top Searches",
         ),
         kHeight,
@@ -29,7 +28,14 @@ class SearchIdleWidget extends StatelessWidget {
                 future: apicall(ApiEndPoints.trendingall),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return const Text("Please wait");
+                    Center(
+                      child: Column(
+                        children: const [
+                          CircularProgressIndicator(color: Colors.blue,),
+                          Text('Please wait'),
+                        ],
+                      ),
+                    );
                   }
                   if (snapshot.data == null) {
                     return const Text("No data found");
@@ -65,9 +71,9 @@ class TopSearchItemTile extends StatelessWidget {
         Expanded(
             child: Text(
          movieInfo.title??"No Movie Name Found",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         )),
-        Icon(
+        const Icon(
           CupertinoIcons.play_circle,
           size: 50,
         )

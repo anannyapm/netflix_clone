@@ -40,6 +40,6 @@ class DownloadsImageWidget extends StatelessWidget {
         ),
       ),
     );
-    ;
+    
   }
 }

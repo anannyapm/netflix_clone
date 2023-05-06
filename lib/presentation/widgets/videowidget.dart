@@ -13,7 +13,6 @@ class VideoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(videoImage);
     return Stack(
       children: [
         SizedBox(

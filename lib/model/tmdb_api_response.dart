@@ -1,22 +1,20 @@
-
 import 'movie_info.dart';
 
 class TMDBApiResponseModel {
-  final int page;
-  final List<MovieInfoModel> results;
-  final int totalPages;
-  final int totalResults;
+  int page = 0;
+  List<MovieInfoModel> results = [];
+  int totalPages = 0;
+  int totalResults = 0;
 
-  TMDBApiResponseModel.fromJson(Map data)
-      : page = data['page'] ?? 0,
-        results = data['results'] == null
-            ? []
-            : List<MovieInfoModel>.from(data['results'].map((item) {
-                MovieInfoModel movieInfo = MovieInfoModel.fromJson(item);
-                return movieInfo;
-              })),
-        totalPages = data['total_pages'] ?? 0,
-        totalResults = data['total_results'] ?? 0;
+  TMDBApiResponseModel.fromJson(Map data) {
+    page = data['page'];
+    results = List<MovieInfoModel>.from(data['results'].map((item) {
+      MovieInfoModel movieInfo = MovieInfoModel.fromJson(item);
+      return movieInfo;
+    }));
+    totalPages = data['total_pages'];
+    totalResults = data['total_results'];
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

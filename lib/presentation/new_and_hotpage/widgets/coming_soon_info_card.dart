@@ -82,9 +82,8 @@ class ComingSoonInfoCard extends StatelessWidget {
                 ),
                 kHeight,
                 Text(
-                  movieInfo.overview ?? 'Empty Description',
-                  //"Landing the lead in the school musical is a dream come for Jodi, until the pressure sends her confidence - and her relaionship- into a tailspin.",
-                  style: TextStyle(color: kGreyColor),
+                  movieInfo.overview,
+                  style: const TextStyle(color: kGreyColor),
                 ),
                 kHeight20
               ],

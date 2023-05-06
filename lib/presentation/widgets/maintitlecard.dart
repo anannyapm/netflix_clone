@@ -20,7 +20,14 @@ class MainTitleMovieCard extends StatelessWidget {
     return FutureBuilder(
         future: apicall(apiUrl), builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return const Text('Please wait');
+            Center(
+                      child: Column(
+                        children: const [
+                          CircularProgressIndicator(color: Colors.blue,),
+                          Text('Please wait'),
+                        ],
+                      ),
+                    );
           }
 
           if (snapshot.data == null) {

@@ -24,11 +24,11 @@ class _BackgroundCardState extends State<BackgroundCard> {
   }
 
   setImage() async {
-    dynamic result = await apicall(ApiEndPoints.trendingall);
+    dynamic result = await apicall(ApiEndPoints.moviepopular);
 
     setState(() {
       if (result.results.isNotEmpty) {
-        MovieInfoModel movieInfo = result.results[0];
+        MovieInfoModel movieInfo = result.results[3];
         imageUrl =
             "https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=b2dee3b855c4ea705ff5dda3c0201768";
       }
@@ -49,6 +49,15 @@ class _BackgroundCardState extends State<BackgroundCard> {
               fit: BoxFit.cover,
               image: NetworkImage(imageUrl ?? kMainImage),
             ),
+          ),
+        ),Container(
+          width: double.infinity,
+          height: 500,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors:[
+              Colors.black.withOpacity(0.85),
+              Colors.black.withOpacity(0),
+            ],end: Alignment.topCenter,begin: Alignment.bottomCenter)
           ),
         ),
         Positioned(
