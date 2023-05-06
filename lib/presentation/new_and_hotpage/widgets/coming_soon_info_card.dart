@@ -24,13 +24,11 @@ class ComingSoonInfoCard extends StatelessWidget {
         children: [
           SizedBox(
             width: 50,
-            //height: 450,
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  parseDateTime(movieInfo.releaseDate!),
+                  fetchDate(movieInfo.releaseDate!),
                   style: const TextStyle(
                       fontSize: 18,
                       color: kWhiteColor,
@@ -45,6 +43,7 @@ class ComingSoonInfoCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 VideoWidget(videoImage: imageUrl),
+                kHeight,
                 Row(
                   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -59,7 +58,7 @@ class ComingSoonInfoCard extends StatelessWidget {
                         ),
                         kWidth,
                         CustomButtonWidget(
-                          icon: Icons.info,
+                          icon: Icons.info_outline,
                           title: 'Info',
                           iconSize: 17,
                           textSize: 12,
@@ -70,7 +69,7 @@ class ComingSoonInfoCard extends StatelessWidget {
                   ],
                 ),
                 kHeight,
-                Text("Coming on ${getDayName(movieInfo.releaseDate!)}"),
+                Text("Coming on ${fetchDay(movieInfo.releaseDate!)}"),
                 kHeight,
                 Text(
                   movieInfo.originalTitle ?? 'Empty Title',
@@ -94,19 +93,19 @@ class ComingSoonInfoCard extends StatelessWidget {
     );
   }
 
-  String parseDateTime(String date) {
+  String fetchDate(String date) {
+    //convert date in string format to date format 
     DateTime dateInFormat = DateTime.parse(date);
-
-    final dateFormatted = DateFormat.MMMMd().format(dateInFormat);
-
-    final splitedDate = dateFormatted.split(' ');
-
-    return "${splitedDate.first.substring(0, 3)} \n${splitedDate.last} ";
+    final formatDate = (DateFormat.MMMMd().format(dateInFormat)).split(" ");
+    //add \n to make it in the displayable format eg:
+    //APR
+    //5
+    return "${formatDate.first.substring(0, 3)} \n${formatDate.last} ";
   }
 
-  String getDayName(String date) {
+  String fetchDay(String date) {
     DateTime dateInFormat = DateTime.parse(date);
-    final dayWeek = DateFormat('EEEE').format(dateInFormat);
-    return dayWeek;
+    final dayName = DateFormat('EEEE').format(dateInFormat);
+    return dayName;
   }
 }
